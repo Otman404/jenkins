@@ -38,7 +38,7 @@ pipeline {
     stage('Deploy Image') {
       steps {
         script {
-          sh "docker run -d "+ $registry:$BUILD_NUMBER
+          sh "docker run -d $registry:$BUILD_NUMBER"
           }
         }
       }
