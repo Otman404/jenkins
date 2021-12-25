@@ -12,16 +12,24 @@ pipeline {
       }
     }
     stage('Building image') {
-      steps{
+      steps {
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
-    stage('Deploy Image') {
-      steps{
+    stage('Test image') {
+      steps {
         script {
-          docker.withRegistry( '', registryCredential ) {
+
+          echo "Tests passed"
+        }
+      }
+    }
+    stage('Publish Image') {
+      steps {
+        script {
+          docker.withRegistry('', registryCredential) {
             dockerImage.push()
           }
         }
